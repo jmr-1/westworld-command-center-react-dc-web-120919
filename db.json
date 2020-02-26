@@ -7,7 +7,7 @@
       "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/5/51/Dolores_Abernathy_Vanishing_Point.jpg/revision/latest?cb=20180613181613",
       "gender": "Female",
-      "area": "lowlands",
+      "area": "badlands",
       "authorized": false
     },
     {
@@ -24,10 +24,10 @@
       "id": 3,
       "firstName": "Maeve",
       "lastName": "Millay",
-      "active": true,
+      "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/d/d8/Maeve_Les_Ecorches.jpg/revision/latest?cb=20180530183051",
       "gender": "Female",
-      "area": "lowlands",
+      "area": "high_plains",
       "authorized": false
     },
     {
@@ -64,10 +64,10 @@
       "id": 7,
       "firstName": "Akane",
       "lastName": "n/a",
-      "active": true,
+      "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/f/f3/Akane.jpg/revision/latest/scale-to-width-down/310?cb=20180520132523",
       "gender": "Female",
-      "area": "python_pass",
+      "area": "high_plains",
       "authorized": false
     },
     {
@@ -97,14 +97,14 @@
       "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/4/44/Clementine_The_Riddle_of_the_Sphinx.jpg/revision/latest?cb=20180516165617",
       "gender": "Female",
-      "area": "high_plains",
+      "area": "python_pass",
       "authorized": false
     },
     {
       "id": 11,
       "firstName": "Armistice",
       "lastName": "n/a",
-      "active": false,
+      "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/7/78/Armistice_Akane_No_Mai.jpg/revision/latest/scale-to-width-down/310?cb=20180517164314",
       "gender": "Female",
       "area": "lowlands",
@@ -144,10 +144,10 @@
       "id": 15,
       "firstName": "Musashi",
       "lastName": "n/a",
-      "active": true,
+      "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/6/6b/Musashi_Akane_No_Mai.jpg/revision/latest/scale-to-width-down/310?cb=20180520131337",
       "gender": "Male",
-      "area": "lowlands",
+      "area": "high_plains",
       "authorized": false
     }
   ],

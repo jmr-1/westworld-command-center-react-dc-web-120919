@@ -18,7 +18,7 @@ class App extends Component {
       areas: [],
       hosts: [],
       selectedHost: null,
-      activated: null,
+      activated: false,
     }
   }
 
@@ -53,8 +53,40 @@ class App extends Component {
     })
   }
 
-  activateButton = () => {
-    console.log('Activating/Deactivating')
+  activateButton = (e) => {
+    let areaList = this.state.areas
+    
+    //check to see if all areas would be able to fit all hosts
+    if(!this.state.activated){
+      for(let i=0; i<areaList.length; i++){
+        let currentArea = areaList[i]
+        let maxNumInArea = currentArea.limit 
+        console.log('Checking area:', currentArea.name, ', max allowed:', maxNumInArea)
+
+        //note: this will check if the combined hosts in one area, both activated and deactivated, will be a problem.
+        //the rules check in HostInfo already checks if you can move to the area if they're active, so since these would be active anyway,
+        //no need for a separate rules check for inactive vs. active hosts 
+        let hostsInArea = [...this.state.hosts].filter(host => {return (host.area === currentArea.name)}).length 
+        console.log('Hosts in', currentArea.name,':', hostsInArea)
+
+        if(hostsInArea > maxNumInArea){
+          //if not, do not allow activation. 
+          alert('Too many hosts will be entering at least one area!')
+          return null 
+        }
+      }
+    }
+    //if so, activate everything 
+    console.log((this.state.activated)? "Deactivating": "Activating")
+    let activatedHosts = [...this.state.hosts]
+    activatedHosts.forEach(host => (!this.state.activated)? host['active'] = true: host['active'] = false)
+    console.log('Hosts activated:', activatedHosts)
+
+
+    this.setState({
+      activated: !this.state.activated,
+      hosts: activatedHosts
+    })
   }
 
   render(){

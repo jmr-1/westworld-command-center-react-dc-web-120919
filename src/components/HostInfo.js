@@ -86,8 +86,8 @@ class HostInfo extends Component {
           <Card>
             <Card.Content>
               <Card.Header>
-                {this.props.selectedHost.firstName} | { (this.props.selectedHost.gender==='Male') ? <Icon name='man' /> : <Icon name='woman' />}
-                {this.props.selectedHost.lastName}
+                {this.props.selectedHost.firstName} {(this.props.selectedHost.lastName==='n/a')? null : this.props.selectedHost.lastName} | { (this.props.selectedHost.gender==='Male') ? <Icon name='man' /> : <Icon name='woman' />}
+                
               </Card.Header>
               <Card.Meta>
                 <Radio
