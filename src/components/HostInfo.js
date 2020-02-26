@@ -28,7 +28,7 @@ class HostInfo extends Component {
     let numHostInArea = this.props.hosts.filter(host => host.area === value && host.active === true).length
     let maxHostsInArea = this.props.areaInfo.filter(area => area.name === value)[0].limit
 
-    if(numHostInArea<maxHostsInArea){
+    if(numHostInArea<maxHostsInArea || !this.props.selectedHost.active){
 
       this.props.selectedHost.area = value 
       fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
@@ -40,6 +40,9 @@ class HostInfo extends Component {
         }).then(res => res.json()).then(data => console.log(data))
 
         this.props.selectHost(e, this.props.selectedHost)
+    }
+    else{
+      alert(`You are attemping to place too many hosts in ${value}. The limit for that area is ${maxHostsInArea}.`)
     }
   }
 
@@ -61,6 +64,9 @@ class HostInfo extends Component {
         }
       }).then(res => res.json()).then(data => console.log(data))
       this.props.selectHost(e, this.props.selectedHost)
+    }
+    else{
+      alert(`You are attemping to place too many hosts in ${hostArea}. The limit for that area is ${maxHostsInArea}.`)
     }
   }
 

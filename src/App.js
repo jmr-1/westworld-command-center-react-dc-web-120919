@@ -17,7 +17,8 @@ class App extends Component {
 
       areas: [],
       hosts: [],
-      selectedHost: {},
+      selectedHost: null,
+      activated: null,
     }
   }
 
@@ -52,11 +53,15 @@ class App extends Component {
     })
   }
 
+  activateButton = () => {
+    console.log('Activating/Deactivating')
+  }
+
   render(){
     return (
       <Segment id='app'>
         <WestworldMap areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost}/>
-        <Headquarters hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} />
+        <Headquarters hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} activated={this.state.activated} activateHandler={this.activateButton}/>
       </Segment>
     )
   }
