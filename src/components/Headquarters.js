@@ -24,7 +24,7 @@ class Headquarters extends Component {
         <Grid.Column width={3}>
 
         {/* and here. Take visual cues from the screenshot/video in the Readme. */}
-        <HostInfo selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost}/>
+        <HostInfo selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost} areaInfo={this.props.areaInfo} hosts={this.props.hosts}/>
 
         </Grid.Column>
       </Grid>

@@ -24,34 +24,48 @@ class HostInfo extends Component {
     // Put a debugger in here and see what the "value" variable is when you pass in different options.
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
 
-    console.log(value)
-   this.props.selectedHost.area = value 
-   fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
-     method: 'PATCH',
-     body: JSON.stringify(this.props.selectedHost),
-     headers: {
-       'Content-Type': 'application/json; charset=UTF-8'
-     }
-    }).then(res => res.json()).then(data => console.log(data))
+    //check the hosts list first to count the number of people in each area 
+    let numHostInArea = this.props.hosts.filter(host => host.area === value && host.active === true).length
+    let maxHostsInArea = this.props.areaInfo.filter(area => area.name === value)[0].limit
 
-    this.props.selectHost(e, this.props.selectedHost)
+    if(numHostInArea<maxHostsInArea){
 
+      this.props.selectedHost.area = value 
+      fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
+        method: 'PATCH',
+        body: JSON.stringify(this.props.selectedHost),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+        }).then(res => res.json()).then(data => console.log(data))
+
+        this.props.selectHost(e, this.props.selectedHost)
+    }
   }
 
   toggle = (e) => {
-    console.log("The radio button fired");
-    this.props.selectedHost.active = !this.props.selectedHost.active
-    fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
-      method: 'PATCH',
-      body: JSON.stringify(this.props.selectedHost),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-     }).then(res => res.json()).then(data => console.log(data))
-     this.props.selectHost(e, this.props.selectedHost)
+
+    let hostArea = this.props.selectedHost.area 
+    let numHostInArea = this.props.hosts.filter(host => (host.area === hostArea && host.active === true)).length
+    let maxHostsInArea = this.props.areaInfo.filter(area => area.name === this.props.selectedHost.area )[0].limit
+
+    // console.log('Checking for num hosts:', numHostInArea,'max hosts:', maxHostsInArea)
+
+    if((numHostInArea<maxHostsInArea && !this.props.selectedHost.active) || this.props.selectedHost.active){
+      this.props.selectedHost.active = !this.props.selectedHost.active
+      fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
+        method: 'PATCH',
+        body: JSON.stringify(this.props.selectedHost),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      }).then(res => res.json()).then(data => console.log(data))
+      this.props.selectHost(e, this.props.selectedHost)
+    }
   }
 
   render(){
+    console.log('hostinfo areainfo', this.props.areaInfo)
     return (
       <Grid>
         <Grid.Column width={6}>

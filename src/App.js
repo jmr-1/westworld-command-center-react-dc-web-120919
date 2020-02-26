@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <Segment id='app'>
         <WestworldMap areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost}/>
-        <Headquarters hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)}/>
+        <Headquarters hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} />
       </Segment>
     )
   }
