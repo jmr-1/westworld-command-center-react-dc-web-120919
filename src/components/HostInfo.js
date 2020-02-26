@@ -2,7 +2,6 @@ import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
 
-
 class HostInfo extends Component {
   // state = {
   //   options: null,
@@ -40,9 +39,12 @@ class HostInfo extends Component {
         }).then(res => res.json()).then(data => console.log(data))
 
         this.props.selectHost(e, this.props.selectedHost)
+        let newLog = [...this.props.logs]
+        this.props.logNewEvent(`${this.props.selectedHost.firstName} ${(this.props.selectedHost.lastName==='n/a')? null : this.props.selectedHost.lastName} set in area ${value}`, 'notify', newLog)
     }
     else{
-      alert(`You are attemping to place too many hosts in ${value}. The limit for that area is ${maxHostsInArea}.`)
+      let newLog = [...this.props.logs]
+      this.props.logNewEvent(`You are attemping to place too many hosts in ${value.replace(/_/g, ' ')}. The limit for that area is ${maxHostsInArea}.`, 'error', newLog)
     }
   }
 
@@ -56,6 +58,7 @@ class HostInfo extends Component {
 
     if((numHostInArea<maxHostsInArea && !this.props.selectedHost.active) || this.props.selectedHost.active){
       this.props.selectedHost.active = !this.props.selectedHost.active
+      let activeStatus = this.props.selectedHost.active
       fetch(`http://localhost:3000/hosts/${this.props.selectedHost.id}`,{
         method: 'PATCH',
         body: JSON.stringify(this.props.selectedHost),
@@ -64,9 +67,14 @@ class HostInfo extends Component {
         }
       }).then(res => res.json()).then(data => console.log(data))
       this.props.selectHost(e, this.props.selectedHost)
+      let newLog = [...this.props.logs]
+      this.props.logNewEvent(
+        `${(activeStatus)? 'Activated' : 'Decommissioned'} ${this.props.selectedHost.firstName} ${(this.props.selectedHost.lastName==='n/a')? null : this.props.selectedHost.lastName}`                      
+        , `${(activeStatus)? 'warn': 'notify'}`, newLog)
     }
     else{
-      alert(`You are attemping to place too many hosts in ${hostArea}. The limit for that area is ${maxHostsInArea}.`)
+      let newLog = [...this.props.logs]
+      this.props.logNewEvent(`You are attemping to place too many hosts in ${hostArea.replace(/_/g, ' ')}. The limit for that area is ${maxHostsInArea}.`, 'error', newLog)
     }
   }
 

@@ -4,10 +4,6 @@ import { Log } from '../services/Log'
 
 const LogPanel = (props) => {
 
-  console.log('logpanel logs', props.logs)
-
-  
-
   const dummyLogs = () => {
     // This is just to show you how this should work. But where should the log data actually get stored?
     // And where should we be creating logs in the first place?

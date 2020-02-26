@@ -4,7 +4,7 @@
       "id": 1,
       "firstName": "Dolores",
       "lastName": "Abernathy",
-      "active": false,
+      "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/5/51/Dolores_Abernathy_Vanishing_Point.jpg/revision/latest?cb=20180613181613",
       "gender": "Female",
       "area": "badlands",
@@ -24,7 +24,7 @@
       "id": 3,
       "firstName": "Maeve",
       "lastName": "Millay",
-      "active": false,
+      "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/d/d8/Maeve_Les_Ecorches.jpg/revision/latest?cb=20180530183051",
       "gender": "Female",
       "area": "under_construction",
@@ -44,10 +44,10 @@
       "id": 5,
       "firstName": "Peter",
       "lastName": "Abernathy",
-      "active": false,
+      "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/a/a2/Peter_Abernathy_%281%29.jpg/revision/latest?cb=20161024014816",
       "gender": "Male",
-      "area": "under_construction",
+      "area": "badlands",
       "authorized": false
     },
     {
@@ -67,7 +67,7 @@
       "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/f/f3/Akane.jpg/revision/latest/scale-to-width-down/310?cb=20180520132523",
       "gender": "Female",
-      "area": "badlands",
+      "area": "python_pass",
       "authorized": false
     },
     {
@@ -94,7 +94,7 @@
       "id": 10,
       "firstName": "Clementine",
       "lastName": "Pennyfeather",
-      "active": false,
+      "active": true,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/4/44/Clementine_The_Riddle_of_the_Sphinx.jpg/revision/latest?cb=20180516165617",
       "gender": "Female",
       "area": "high_plains",
@@ -147,7 +147,7 @@
       "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/6/6b/Musashi_Akane_No_Mai.jpg/revision/latest/scale-to-width-down/310?cb=20180520131337",
       "gender": "Male",
-      "area": "pariah",
+      "area": "badlands",
       "authorized": false
     }
   ],

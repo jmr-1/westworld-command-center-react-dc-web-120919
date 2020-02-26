@@ -11,7 +11,6 @@ class Headquarters extends Component {
 
   render(){
 
-    console.log('headquarters logs', this.props.logs)
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
@@ -24,7 +23,7 @@ class Headquarters extends Component {
           {
           (!this.props.selectedHost)?
           <Details /> :
-          <HostInfo logs={this.props.logs} selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost} areaInfo={this.props.areaInfo} hosts={this.props.hosts}/>
+          <HostInfo logNewEvent ={this.props.logNewEvent} logs={this.props.logs} selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost} areaInfo={this.props.areaInfo} hosts={this.props.hosts}/>
           }
         </Grid.Column>
         <Grid.Column width={3}>

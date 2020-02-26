@@ -42,7 +42,7 @@ class App extends Component {
 
   selectHost = (e, host) => {
     
-    console.log('selected host:', host)
+    // console.log('selected host:', host)
     this.setState({
       selectedHost: host
     })
@@ -109,11 +109,22 @@ class App extends Component {
     // }).then(res => res.json()).then(data => console.log(data))
   }
 
+
+  logNewEvent = (eventMessage, eventType, newLog) => {
+    (eventType==='error')? newLog.unshift(Log.error(eventMessage)) : 
+      (eventType==='notify')? newLog.unshift(Log.notify(eventMessage)) : 
+      (eventType==='warn')? newLog.unshift(Log.warn(eventMessage)) : null  
+
+    this.setState({
+      logs: newLog
+    })
+  }
+
   render(){
     return (
       <Segment id='app'>
         <WestworldMap areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost}/>
-        <Headquarters logs={this.state.logs} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} activated={this.state.activated} activateHandler={this.activateButton}/>
+        <Headquarters logNewEvent={this.logNewEvent} logs={this.state.logs} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} activated={this.state.activated} activateHandler={this.activateButton}/>
       </Segment>
     )
   }
