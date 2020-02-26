@@ -3,6 +3,7 @@ import './stylesheets/App.css'
 import { Segment } from 'semantic-ui-react';
 import WestworldMap from './components/WestworldMap.js'
 import Headquarters from './components/Headquarters.js'
+import { Log } from './services/Log'
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
       hosts: [],
       selectedHost: null,
       activated: false,
+      logs: []
     }
   }
 
@@ -55,6 +57,7 @@ class App extends Component {
 
   activateButton = (e) => {
     let areaList = this.state.areas
+    let newLog = [...this.state.logs]
     
     //check to see if all areas would be able to fit all hosts
     if(!this.state.activated){
@@ -62,38 +65,55 @@ class App extends Component {
         let currentArea = areaList[i]
         let maxNumInArea = currentArea.limit 
         console.log('Checking area:', currentArea.name, ', max allowed:', maxNumInArea)
-
+        
         //note: this will check if the combined hosts in one area, both activated and deactivated, will be a problem.
         //the rules check in HostInfo already checks if you can move to the area if they're active, so since these would be active anyway,
         //no need for a separate rules check for inactive vs. active hosts 
         let hostsInArea = [...this.state.hosts].filter(host => {return (host.area === currentArea.name)}).length 
         console.log('Hosts in', currentArea.name,':', hostsInArea)
-
+        
         if(hostsInArea > maxNumInArea){
           //if not, do not allow activation. 
-          alert('Too many hosts will be entering at least one area!')
+          newLog.unshift(Log.error('Too many hosts will be entering at least one area!'))
+          this.setState({
+            logs: newLog
+          })
+          
           return null 
         }
       }
     }
     //if so, activate everything 
-    console.log((this.state.activated)? "Deactivating": "Activating")
+    // console.log((this.state.activated)? "Deactivating": "Activating")
     let activatedHosts = [...this.state.hosts]
     activatedHosts.forEach(host => (!this.state.activated)? host['active'] = true: host['active'] = false)
-    console.log('Hosts activated:', activatedHosts)
-
+    
+    if(!this.state.activated){
+      newLog.unshift(Log.warn('Activating all hosts!'))
+    }
+    else{
+      newLog.unshift(Log.notify('Decommissioning all hosts!'))
+    }
 
     this.setState({
       activated: !this.state.activated,
-      hosts: activatedHosts
+      hosts: activatedHosts,
+      logs: newLog
     })
+    // fetch('http://localhost:3000/hosts', {
+    //   method: 'PUT',
+    //   body: JSON.stringify(activatedHosts),
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   }
+    // }).then(res => res.json()).then(data => console.log(data))
   }
 
   render(){
     return (
       <Segment id='app'>
         <WestworldMap areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost}/>
-        <Headquarters hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} activated={this.state.activated} activateHandler={this.activateButton}/>
+        <Headquarters logs={this.state.logs} hosts={this.state.hosts} selectedHost={this.state.selectedHost} selectHost={this.selectHost} areaOptions={this.makeAreaOptionsForHostInfo(this.state.areas)} areaInfo={this.state.areas} activated={this.state.activated} activateHandler={this.activateButton}/>
       </Segment>
     )
   }

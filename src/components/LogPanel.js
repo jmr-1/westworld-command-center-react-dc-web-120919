@@ -4,12 +4,15 @@ import { Log } from '../services/Log'
 
 const LogPanel = (props) => {
 
+  console.log('logpanel logs', props.logs)
+
+  
+
   const dummyLogs = () => {
     // This is just to show you how this should work. But where should the log data actually get stored?
     // And where should we be creating logs in the first place?
     // Use the Log Service class (located in: 'src/services/Log') we've created anywhere you like.
     // Just remember to import it
-
     let logs = []
 
     logs.unshift(Log.warn("This is an example of a warn log"))
@@ -24,7 +27,9 @@ const LogPanel = (props) => {
   return(
     <Segment className="HQComps" id="logPanel">
       <pre>
-        {dummyLogs().map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)}
+        {/* {dummyLogs().map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)} */}
+
+        {props.logs.map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)}
       </pre>
       
       {/* Button below is the Activate All/Decommisssion All button */}

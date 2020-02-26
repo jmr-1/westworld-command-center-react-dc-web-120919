@@ -10,6 +10,8 @@ class Headquarters extends Component {
   // Remember, there's many ways to do this. This doesn't have to be a class component. It's up to you.
 
   render(){
+
+    console.log('headquarters logs', this.props.logs)
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
@@ -22,11 +24,11 @@ class Headquarters extends Component {
           {
           (!this.props.selectedHost)?
           <Details /> :
-          <HostInfo selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost} areaInfo={this.props.areaInfo} hosts={this.props.hosts}/>
+          <HostInfo logs={this.props.logs} selectedHost={this.props.selectedHost} areaOptions={this.props.areaOptions} selectHost={this.props.selectHost} areaInfo={this.props.areaInfo} hosts={this.props.hosts}/>
           }
         </Grid.Column>
         <Grid.Column width={3}>
-          <LogPanel activatedStatus={this.props.activated} activateHandler={this.props.activateHandler}/>
+          <LogPanel activatedStatus={this.props.activated} activateHandler={this.props.activateHandler} logs={this.props.logs}/>
         </Grid.Column>
       </Grid>
     )
